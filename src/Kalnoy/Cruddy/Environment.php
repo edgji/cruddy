@@ -2,7 +2,7 @@
 
 namespace Kalnoy\Cruddy;
 
-use Illuminate\Support\Contracts\JsonableInterface;
+use Illuminate\Contracts\Support\JsonableInterface;
 use Illuminate\Http\Request;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Events\Dispatcher;
@@ -12,7 +12,7 @@ use Kalnoy\Cruddy\Service\Permissions\PermissionsManager;
 
 /**
  * Cruddy environment.
- * 
+ *
  * @since 1.0.0
  */
 class Environment implements JsonableInterface {
@@ -113,14 +113,14 @@ class Environment implements JsonableInterface {
 
     /**
      * Find a field with given id.
-     * 
+     *
      * The full field id consists of two parts: the entity id and the field id.
      * I.e. `users.password`.
      *
      * @param string $id
      *
      * @return \Kalnoy\Cruddy\Schema\Fields\BaseField
-     * 
+     *
      * @throws \RuntimeException if field is not found.
      */
     public function field($id)

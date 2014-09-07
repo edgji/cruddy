@@ -2,16 +2,16 @@
 
 namespace Kalnoy\Cruddy\Schema;
 
-use Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Contracts\Support\ArrayableInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Kalnoy\Cruddy\Repo\RepositoryInterface;
 
 /**
  * The schema interface.
- * 
+ *
  * Schema is used by the entity to initialize components. It also provides additional
  * configuration for the UI.
- * 
+ *
  * @since 1.0.0
  */
 interface SchemaInterface extends ArrayableInterface {

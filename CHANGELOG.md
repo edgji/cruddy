@@ -1,3 +1,9 @@
+v0.4.0
+======
+
+*   Support Laravel 4.3
+*   Removed `layout` config option
+
 v0.3.1
 ======
 

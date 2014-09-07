@@ -4,8 +4,8 @@ namespace Kalnoy\Cruddy;
 
 use RuntimeException;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Contracts\Support\JsonableInterface;
+use Illuminate\Contracts\Support\ArrayableInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Kalnoy\Cruddy\ModelNotFoundException;
 use Kalnoy\Cruddy\Schema\SchemaInterface;
@@ -17,7 +17,7 @@ use Kalnoy\Cruddy\Repo\ChainedSearchProcessor;
 
 /**
  * The entity class that is responsible for operations on model.
- * 
+ *
  * @since 1.0.0
  */
 class Entity implements JsonableInterface, ArrayableInterface {
@@ -80,7 +80,7 @@ class Entity implements JsonableInterface, ArrayableInterface {
 
     /**
      * The list of all actions.
-     * 
+     *
      * @var array
      */
     protected static $actions = [ 'view', 'update', 'create', 'delete' ];
@@ -161,7 +161,7 @@ class Entity implements JsonableInterface, ArrayableInterface {
      *     from the model
      * - `order` -- the array of key-value pairs where key is a column id and value
      *     is order direction:
-     *     
+     *
      *     ```php
      *     ['name' => 'asc']
      *     ```
@@ -260,9 +260,9 @@ class Entity implements JsonableInterface, ArrayableInterface {
 
     /**
      * Create new model and return extracted attributes.
-     * 
+     *
      * @param array $attributes
-     * 
+     *
      * @return array
      */
     public function create(array $attributes)
@@ -272,10 +272,10 @@ class Entity implements JsonableInterface, ArrayableInterface {
 
     /**
      * Update a model and return its extracted attributes.
-     * 
+     *
      * @param mixed $id
      * @param array $attributes
-     * 
+     *
      * @return array
      */
     public function update($id, array $attributes)
@@ -453,7 +453,7 @@ class Entity implements JsonableInterface, ArrayableInterface {
 
     /**
      * Process and validate related items.
-     * 
+     *
      * If corresponding input key doesn't exists, nothing will happen with the
      * related items (i.e. they will not be removed).
      *
@@ -506,7 +506,7 @@ class Entity implements JsonableInterface, ArrayableInterface {
 
     /**
      * Process, save and return extracted attributes of the model.
-     * 
+     *
      * If $input contains `id` attribute it is condisdered that model is exists
      * and Cruddy will try to update it; it will create a new model otherwise.
      *
@@ -534,9 +534,9 @@ class Entity implements JsonableInterface, ArrayableInterface {
     /**
      * Translate line.
      *
-     * If key isn't namespaced, looks for a key under entity's id namespace, 
+     * If key isn't namespaced, looks for a key under entity's id namespace,
      * then under `entities` namespace. Othwerwise, just translates line as is.
-     * 
+     *
      * @param string $key
      * @param string $default
      *
