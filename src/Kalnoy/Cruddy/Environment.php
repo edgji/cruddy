@@ -2,14 +2,13 @@
 
 namespace Kalnoy\Cruddy;
 
-use Illuminate\Support\Contracts\JsonableInterface;
+use Illuminate\Contracts\Support\JsonableInterface;
 use Illuminate\Http\Request;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Events\Dispatcher;
 use Kalnoy\Cruddy\Schema\Fields\Factory as FieldFactory;
 use Kalnoy\Cruddy\Schema\Columns\Factory as ColumnFactory;
 use Kalnoy\Cruddy\Service\Permissions\PermissionsManager;
-use RuntimeException;
 
 /**
  * Cruddy environment.
@@ -26,31 +25,31 @@ class Environment implements JsonableInterface {
     /**
      * The entities repository.
      *
-     * @var Repository
+     * @var \Kalnoy\Cruddy\Repository
      */
     protected $entities;
 
     /**
      * The field factory.
      *
-     * @var Schema\Fields\Factory
+     * @var \Kalnoy\Cruddy\Schema\Fields\Factory
      */
     protected $fields;
 
     /**
      * The column factory.
      *
-     * @var Schema\Columns\Factory
+     * @var \Kalnoy\Cruddy\Schema\Columns\Factory
      */
     protected $columns;
 
     /**
-     * @var Service\Permissions\PermissionsManager
+     * @var \Kalnoy\Cruddy\Service\Permissions\PermissionsManager
      */
     protected $permissions;
 
     /**
-     * @var Lang
+     * @var \Kalnoy\Cruddy\Lang
      */
     protected $lang;
 
@@ -61,15 +60,6 @@ class Environment implements JsonableInterface {
      */
     protected $dispatcher;
 
-    /**
-     * @param Config             $config
-     * @param Repository         $entities
-     * @param FieldFactory       $fields
-     * @param ColumnFactory      $columns
-     * @param PermissionsManager $permissions
-     * @param Lang               $lang
-     * @param Dispatcher         $dispatcher
-     */
     public function __construct(
         Config $config, Repository $entities, FieldFactory $fields, ColumnFactory $columns,
         PermissionsManager $permissions, Lang $lang, Dispatcher $dispatcher)
@@ -88,7 +78,7 @@ class Environment implements JsonableInterface {
      *
      * @param $id
      *
-     * @return Entity
+     * @return \Kalnoy\Cruddy\Entity
      */
     public function entity($id)
     {
@@ -129,9 +119,9 @@ class Environment implements JsonableInterface {
      *
      * @param string $id
      *
-     * @throws RuntimeException
+     * @return \Kalnoy\Cruddy\Schema\Fields\BaseField
      *
-     * @return Schema\Fields\BaseField
+     * @throws \RuntimeException if field is not found.
      */
     public function field($id)
     {
@@ -151,8 +141,8 @@ class Environment implements JsonableInterface {
     /**
      * Get whether the action for an entity is permitted.
      *
-     * @param string $action
-     * @param Entity $entity
+     * @param string                $action
+     * @param \Kalnoy\Cruddy\Entity $entity
      *
      * @return bool
      */
@@ -164,7 +154,7 @@ class Environment implements JsonableInterface {
     /**
      * Get field factory.
      *
-     * @return Schema\Fields\Factory
+     * @return \Kalnoy\Cruddy\Schema\Fields\Factory
      */
     public function getFieldFactory()
     {
@@ -174,7 +164,7 @@ class Environment implements JsonableInterface {
     /**
      * Get column factory.
      *
-     * @return Schema\Columns\Factory
+     * @return \Kalnoy\Cruddy\Schema\Columns\Factory
      */
     public function getColumnFactory()
     {
@@ -184,7 +174,7 @@ class Environment implements JsonableInterface {
     /**
      * Permissions object.
      *
-     * @return Service\Permissions\PermissionsManager
+     * @return \Kalnoy\Cruddy\Service\Permissions\PermissionsManager
      */
     public function getPermissions()
     {
@@ -194,7 +184,7 @@ class Environment implements JsonableInterface {
     /**
      * Get entity repository.
      *
-     * @return Repository
+     * @return \Kalnoy\Cruddy\Repository
      */
     public function getEntities()
     {
@@ -208,7 +198,7 @@ class Environment implements JsonableInterface {
      */
     public function schema()
     {
-        return array_map(function (Entity $entity)
+        return array_map(function ($entity)
         {
             return $entity->toArray();
 
